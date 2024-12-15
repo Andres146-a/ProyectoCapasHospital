@@ -1,47 +1,60 @@
 package com.hospital.modelos;
 
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TomaSignos {
     private int id;
-    private SignoVital signoVital;
-    private double valor;
-    private LocalDateTime fecha;
+    private int idPaciente;
+    private LocalDate fecha;
+    private int pulso;
+    private String presion;
+    private double temperatura;
 
-    public TomaSignos(int id, SignoVital signoVital, double valor, LocalDateTime fecha) {
-        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
-        if (signoVital == null) throw new IllegalArgumentException("El signo vital no puede ser nulo.");
-        if (valor < signoVital.getRangoMinimo() || valor > signoVital.getRangoMaximo()) {
-            throw new IllegalArgumentException("El valor está fuera del rango permitido para " + signoVital.getNombre());
+    public TomaSignos(int id, int idPaciente, LocalDate fecha, int pulso, String presion, double temperatura) {
+        if (pulso <= 0 || temperatura <= 0) {
+            throw new IllegalArgumentException("El pulso y temperatura deben ser mayores que 0.");
         }
-        if (fecha == null) throw new IllegalArgumentException("La fecha no puede ser nula.");
-
         this.id = id;
-        this.signoVital = signoVital;
-        this.valor = valor;
+        this.idPaciente = idPaciente;
         this.fecha = fecha;
+        this.pulso = pulso;
+        this.presion = presion;
+        this.temperatura = temperatura;
     }
 
-    // Getters
     public int getId() {
         return id;
     }
 
-    public SignoVital getSignoVital() {
-        return signoVital;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
+    }
+
+    public int getPulso() {
+        return pulso;
+    }
+
+    public String getPresion() {
+        return presion;
+    }
+
+    public double getTemperatura() {
+        return temperatura;
     }
 
     @Override
     public String toString() {
-        return "TomaSignos{id=" + id + ", signoVital=" + signoVital.getNombre() + ", valor=" + valor + ", fecha=" + fecha + "}";
+        return "TomaSignos{" +
+                "id=" + id +
+                ", idPaciente=" + idPaciente +
+                ", fecha=" + fecha +
+                ", pulso=" + pulso +
+                ", presion='" + presion + '\'' +
+                ", temperatura=" + temperatura +
+                '}';
     }
 }

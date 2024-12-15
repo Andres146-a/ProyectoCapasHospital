@@ -1,5 +1,9 @@
 package com.hospital.repositorios;
 
-public class TomaSignosRepository {
-    
+import com.hospital.modelos.TomaSignos;
+import java.util.List;
+
+public interface TomaSignosRepository {
+    void guardarTomaSignos(TomaSignos tomaSignos);
+    List<TomaSignos> listarTodos();
 }

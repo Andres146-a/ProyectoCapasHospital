@@ -6,21 +6,26 @@ import java.util.List;
 public class Paciente {
     private int id;
     private String nombre;
+    private String apellido; // Agregar el atributo apellido
     private int edad;
     private List<TomaSignos> registroS;
 
-    public Paciente(int id, String nombre, int edad) {
+    public Paciente(int id, String nombre, String apellido, int edad) {
         if (id <= 0) {
             throw new IllegalArgumentException("El ID debe ser mayor que 0.");
         }
         if (nombre == null || nombre.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío.");
         }
+        if (apellido == null || apellido.isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede estar vacío.");
+        }
         if (edad <= 0) {
             throw new IllegalArgumentException("La edad debe ser mayor que 0.");
         }
         this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido; // Inicializar el apellido
         this.edad = edad;
         this.registroS = new ArrayList<>();
     }
@@ -46,6 +51,17 @@ public class Paciente {
         this.nombre = nombre;
     }
 
+    public String getApellido() { // Getter para apellido
+        return apellido;
+    }
+
+    public void setApellido(String apellido) { // Setter para apellido
+        if (apellido == null || apellido.isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede estar vacío.");
+        }
+        this.apellido = apellido;
+    }
+
     public int getEdad() {
         return edad;
     }
@@ -68,9 +84,6 @@ public class Paciente {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return "Paciente{id=" + id + ", nombre='" + nombre + "', edad=" + edad + ", registrosSignos=" + registroS.size() + "}";
+        return "Paciente{id=" + id + ", nombre='" + nombre + "', apellido='" + apellido + "', edad=" + edad + ", registrosSignos=" + registroS.size() + "}";
     }
-
-    
 }

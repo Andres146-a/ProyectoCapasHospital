@@ -1,46 +1,48 @@
 package com.hospital.modelos;
 
-
 public class SignoVital {
     private int id;
-    private String nombre; // Ejemplo: Presión arterial, Temperatura, Frecuencia cardíaca
-    private double rangoMinimo;
-    private double rangoMaximo;
+    private String nombre;
+    private String valorNormal;
 
-    public SignoVital(int id, String nombre, double rangoMinimo, double rangoMaximo) {
+    public SignoVital(int id, String nombre, String valorNormal) {
         if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
-        if (nombre == null || nombre.isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        }
-        if (rangoMinimo >= rangoMaximo) {
-            throw new IllegalArgumentException("El rango mínimo debe ser menor que el máximo.");
-        }
-
+        if (nombre == null || nombre.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        if (valorNormal == null || valorNormal.isEmpty()) throw new IllegalArgumentException("El valor normal no puede estar vacío.");
         this.id = id;
         this.nombre = nombre;
-        this.rangoMinimo = rangoMinimo;
-        this.rangoMaximo = rangoMaximo;
+        this.valorNormal = valorNormal;
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public double getRangoMinimo() {
-        return rangoMinimo;
+    public void setNombre(String nombre) {
+        if (nombre == null || nombre.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        this.nombre = nombre;
     }
 
-    public double getRangoMaximo() {
-        return rangoMaximo;
+    public String getValorNormal() {
+        return valorNormal;
+    }
+
+    public void setValorNormal(String valorNormal) {
+        if (valorNormal == null || valorNormal.isEmpty()) throw new IllegalArgumentException("El valor normal no puede estar vacío.");
+        this.valorNormal = valorNormal;
     }
 
     @Override
     public String toString() {
-        return "SignoVital{id=" + id + ", nombre='" + nombre + "', rangoMinimo=" + rangoMinimo + ", rangoMaximo=" + rangoMaximo + "}";
+        return "SignoVital{id=" + id + ", nombre='" + nombre + "', valorNormal='" + valorNormal + "'}";
     }
 }

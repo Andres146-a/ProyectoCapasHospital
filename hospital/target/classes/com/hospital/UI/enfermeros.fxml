@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.EnfermerosController">
+    <Label text="Gestión de Enfermeros" style="-fx-font-size: 18px;"/>
+    <HBox spacing="10">
+        <Label text="Nombre:"/>
+        <TextField fx:id="nombreField" promptText="Ingrese el nombre del enfermero"/>
+        <Button text="Buscar" onAction="#buscarEnfermero"/>
+    </HBox>
+    <TableView fx:id="enfermerosTable">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn"/>
+            <TableColumn text="Nombre" fx:id="nombreColumn"/>
+            <TableColumn text="Especialidad" fx:id="especialidadColumn"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Agregar" onAction="#agregarEnfermero"/>
+        <Button text="Actualizar" onAction="#actualizarEnfermero"/>
+        <Button text="Eliminar" onAction="#eliminarEnfermero"/>
+    </HBox>
+</VBox>

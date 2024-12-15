@@ -1,5 +1,12 @@
 package com.hospital.repositorios;
 
-public class SignosPacientesRepository {
-    
+import com.hospital.modelos.SignosPaciente;
+import java.util.List;
+
+public interface SignosPacientesRepository {
+    void guardarSignosPaciente(SignosPaciente signosPaciente);
+    void actualizarSignosPaciente(SignosPaciente signosPaciente);
+    void eliminarSignosPaciente(int idSignosPaciente);
+    SignosPaciente buscarPorId(int idSignosPaciente);
+    List<SignosPaciente> listarTodos();
 }
