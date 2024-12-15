@@ -3,10 +3,12 @@ package com.hospital.UI;
 import com.hospital.negocio.PacientesFacade;
 import com.hospital.modelos.Paciente;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class PacientesController {
 
@@ -14,30 +16,46 @@ public class PacientesController {
     private TextField nombreField;
 
     @FXML
-    private TextField apellidoField;
+    private TableView<Paciente> pacientesTable;
 
     @FXML
-    private TextField fechaNacimientoField;
+    private TableColumn<Paciente, Integer> idColumn;
+
+    @FXML
+    private TableColumn<Paciente, String> nombreColumn;
+
+    @FXML
+    private TableColumn<Paciente, Integer> edadColumn;
 
     private final PacientesFacade pacientesFacade = new PacientesFacade();
 
     @FXML
-    public void guardarPaciente() {
-        try {
-            String nombre = nombreField.getText();
-            String apellido = apellidoField.getText();
-            String fechaNacimiento = fechaNacimientoField.getText();
-
-            // Crear un objeto Paciente
-            Paciente paciente = new Paciente(0, nombre, apellido, fechaNacimiento);
-
-            // Llamar a la fachada para guardar
-            pacientesFacade.guardarPaciente(paciente);
-
-            mostrarMensaje("Éxito", "Paciente guardado correctamente.");
-        } catch (Exception e) {
-            mostrarMensaje("Error", e.getMessage());
+    public void buscarPaciente() {
+        String nombre = nombreField.getText();
+        if (nombre.isEmpty()) {
+            mostrarMensaje("Error", "Debe ingresar un nombre para buscar.");
+            return;
         }
+        // Lógica de búsqueda
+        System.out.println("Buscando paciente con nombre: " + nombre);
+    }
+
+    @FXML
+    public void agregarPaciente() {
+        System.out.println("Agregar paciente");
+        // Lógica para agregar un paciente
+    }
+
+    @FXML
+    public void actualizarPaciente() {
+        System.out.println("Actualizar paciente");
+        // Lógica para actualizar un paciente
+    }
+
+    @FXML
+    public void eliminarPaciente() {
+        System.out.println("Eliminar paciente");
+        // Lógica para eliminar un paciente
     }
 
     private void mostrarMensaje(String titulo, String mensaje) {

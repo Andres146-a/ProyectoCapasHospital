@@ -1,18 +1,29 @@
 package com.hospital.UI;
-
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
     public void start(Stage stage) {
-        Label label = new Label("¡Hola JavaFX desde VS Code!");
-        Scene scene = new Scene(label, 400, 200);
-        stage.setScene(scene);
-        stage.setTitle("Prueba JavaFX");
-        stage.show();
+        try {
+            // Cargar el archivo FXML de la pantalla principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hospital/ui/main.fxml"));
+            Parent root = loader.load();
+
+            // Crear la escena principal
+            Scene scene = new Scene(root);
+
+            // Configurar el escenario (Stage)
+            stage.setScene(scene);
+            stage.setTitle("Hospital Management System");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

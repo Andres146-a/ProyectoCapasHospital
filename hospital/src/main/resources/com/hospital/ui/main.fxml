@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.MainController">
+    <top>
+        <MenuBar>
+            <Menu text="Gestiones">
+                <MenuItem text="Pacientes" onAction="#mostrarGestionPacientes"/>
+                <MenuItem text="Enfermeros" onAction="#mostrarGestionEnfermeros"/>
+                <MenuItem text="Signos Vitales" onAction="#mostrarGestionSignosVitales"/>
+                <MenuItem text="Consultas Médicas" onAction="#mostrarConsultasMedicas"/>
+            </Menu>
+            <Menu text="Reportes">
+                <MenuItem text="Generar Reportes" onAction="#mostrarReportes"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <StackPane fx:id="contenidoPrincipal">
+            <!-- Aquí se cargará dinámicamente el contenido de las diferentes pantallas -->
+        </StackPane>
+    </center>
+</BorderPane>
