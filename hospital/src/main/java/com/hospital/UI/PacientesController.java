@@ -36,9 +36,10 @@ public class PacientesController {
             mostrarMensaje("Error", "Debe ingresar un nombre para buscar.");
             return;
         }
-        // Lógica de búsqueda
+        // Lógica de búsqueda (Falta)
         System.out.println("Buscando paciente con nombre: " + nombre);
     }
+
 
     @FXML
     public void agregarPaciente() {
