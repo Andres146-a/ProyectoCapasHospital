@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.PacientesController"  stylesheets="@styles.css">
+   <HBox alignment="CENTER_LEFT">
+<Button text="Regresar" onAction="#volverDashboard" styleClass="dashboard-button" />
+    </HBox>
+
+    <Label text="Gestión de Pacientes" style="-fx-font-size: 18px;"/>
+    <HBox spacing="10">
+        <Label text="Nombre:"/>
+        <TextField fx:id="nombreField" promptText="Ingrese el nombre del paciente"/>
+        <Button text="Buscar" onAction="#buscarPaciente"/>
+    </HBox>
+    <TableView fx:id="pacientesTable">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn"/>
+            <TableColumn text="Nombre" fx:id="nombreColumn"/>
+            <TableColumn text="Edad" fx:id="edadColumn"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Agregar" onAction="#agregarPaciente"/>
+        <Button text="Actualizar" onAction="#actualizarPaciente"/>
+        <Button text="Eliminar" onAction="#eliminarPaciente"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.MainController" stylesheets="@styles.css">
+    <!-- Encabezado -->
+    <top>
+        <Label text="Hospital Management System" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-padding: 10;"/>
+    </top>
+
+    <!-- Contenido Dinámico -->
+    <center>
+        <StackPane fx:id="contenidoPrincipal" prefHeight="400" style="-fx-background-color: #F9F9F9; -fx-border-color: #C8E6C9; -fx-border-radius: 8;">
+            <!-- Dashboard Principal al Inicio -->
+            <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
+                <!-- Resumen de Estadísticas -->
+                <HBox spacing="50" alignment="CENTER">
+                    <VBox spacing="10" alignment="CENTER" styleClass="dashboard-card">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="100">
+                            <Image url="@paciente.png"/>
+                        </ImageView>
+                        <Label fx:id="lblPacientesActivos" text="Pacientes Activos: 120" styleClass="dashboard-label"/>
+                    </VBox>
+                    <VBox spacing="10" alignment="CENTER" styleClass="dashboard-card">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="100">
+                            <Image url="@consultas.png"/>
+                        </ImageView>
+                        <Label fx:id="lblConsultasDia" text="Consultas Hoy: 35" styleClass="dashboard-label"/>
+                    </VBox>
+                    <VBox spacing="10" alignment="CENTER" styleClass="dashboard-card">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="100">
+                            <Image url="@enfermero.png"/>
+                        </ImageView>
+                        <Label text="Enfermeros Disponibles: 15" styleClass="dashboard-label"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Botones de Navegación -->
+                <HBox spacing="50" alignment="CENTER">
+                    <Button text="Gestión de Pacientes" onAction="#mostrarGestionPacientes" styleClass="dashboard-button"/>
+                    <Button text="Gestión de Enfermeros" onAction="#mostrarGestionEnfermeros" styleClass="dashboard-button"/>
+                    <Button text="Signos Vitales" onAction="#mostrarSignosVitales" styleClass="dashboard-button"/>
+                    <Button text="Generar Reportes" onAction="#mostrarReportes" styleClass="dashboard-button"/>
+                </HBox>
+
+                <!-- Alertas Importantes -->
+                <VBox spacing="10" alignment="CENTER">
+                    <Label text="Alertas Importantes" styleClass="dashboard-alert-title"/>
+                    <ListView fx:id="listAlertas" prefHeight="150" prefWidth="500"/>
+                </VBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

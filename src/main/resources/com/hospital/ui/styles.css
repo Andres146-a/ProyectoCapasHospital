@@ -1,0 +1,60 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+}
+
+
+.header {
+    -fx-background-color: #2E8B57;
+    -fx-padding: 10;
+}
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Tarjetas */
+.dashboard-card {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-padding: 15;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+    -fx-pref-width: 250; /* Aumenta el ancho */
+    -fx-pref-height: 150; /* Ajusta la altura */
+}
+.dashboard-card:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0.3, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-transition: all 0.3s ease;
+}
+
+/* Botones */
+.dashboard-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.dashboard-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Etiquetas */
+.dashboard-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.dashboard-alert-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E8B57;
+}
