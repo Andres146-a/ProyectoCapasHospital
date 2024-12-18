@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.IngresoPacientesController">
+    <Label text="Ingreso de Pacientes" GridPane.columnSpan="2" style="-fx-font-size: 20; -fx-font-weight: bold;" GridPane.halignment="CENTER"/>
+    
+    <Label text="Cédula:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtCedula" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    
+    <Label text="Nombre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtNombre" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Apellidos:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtApellidos" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Fecha Nacimiento:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <DatePicker fx:id="dpFechaNacimiento" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Label text="Sexo:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="cbSexo" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+    <Label text="Teléfono:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtTelefono" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <Label text="Email:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtEmail" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+    <Label text="Dirección:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+    <TextArea fx:id="txtDireccion" prefHeight="60" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+    <Button text="Guardar" onAction="#guardarPaciente" GridPane.rowIndex="9" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+
+   <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard" 
+        style="-fx-background-color: #42A5F5; -fx-text-fill: white;" 
+        GridPane.rowIndex="10" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+
+</GridPane>

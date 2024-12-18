@@ -3,23 +3,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.TomaSignosController">
-    <Label text="Gestión de Toma de Signos" style="-fx-font-size: 18px;"/>
-    <HBox spacing="10">
-        <Label text="Paciente ID:"/>
-        <TextField fx:id="pacienteIdField" promptText="Ingrese el ID del paciente"/>
-        <Button text="Buscar" onAction="#buscarTomaSignos"/>
-    </HBox>
-    <TableView fx:id="tomaSignosTable">
-        <columns>
-            <TableColumn text="ID" fx:id="idColumn"/>
-            <TableColumn text="Fecha" fx:id="fechaColumn"/>
-            <TableColumn text="Descripción" fx:id="descripcionColumn"/>
-        </columns>
-    </TableView>
-    <HBox spacing="10">
-        <Button text="Agregar" onAction="#agregarTomaSignos"/>
-        <Button text="Actualizar" onAction="#actualizarTomaSignos"/>
-        <Button text="Eliminar" onAction="#eliminarTomaSignos"/>
-    </HBox>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.TomaSignosController">
+
+    <!-- Tabla de Signos Vitales a la Izquierda -->
+    <center>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Signos Vitales de Pacientes" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tomaSignosTable" prefHeight="400">
+                <columns>
+                    <TableColumn text="Paciente ID" fx:id="idColumn" prefWidth="100"/>
+                    <TableColumn text="Frecuencia Cardíaca" fx:id="frecuenciaCardiacaColumn" prefWidth="120"/>
+                    <TableColumn text="Presión Arterial" fx:id="presionArterialColumn" prefWidth="120"/>
+                    <TableColumn text="Temperatura" fx:id="temperaturaColumn" prefWidth="100"/>
+                    <TableColumn text="Frecuencia Respiratoria" fx:id="frecuenciaRespiratoriaColumn" prefWidth="150"/>
+                    <TableColumn text="Oxigenación" fx:id="oxigenacionColumn" prefWidth="100"/>
+                    <TableColumn text="Fecha y Hora" fx:id="fechaHoraColumn" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Formulario a la Derecha -->
+    <right>
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+            <Label text="Gestión de Signos Vitales" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Paciente:"/>
+                <ComboBox fx:id="pacienteComboBox" promptText="Seleccione un paciente"/>
+            </HBox>
+
+            <!-- Registro de Signos Vitales -->
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <Label text="Frecuencia Cardíaca:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="frecuenciaCardiacaField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Presión Arterial:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="presionArterialField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Temperatura:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="temperaturaField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Frecuencia Respiratoria:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="frecuenciaRespiratoriaField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Oxigenación:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="oxigenacionField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Fecha y Hora:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="fechaHoraField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Botones de Acción -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Agregar" onAction="#agregarTomaSignos"/>
+                <Button text="Actualizar" onAction="#actualizarTomaSignos"/>
+                <Button text="Eliminar" onAction="#eliminarTomaSignos"/>
+                <Button text="Regresar" onAction="#volverDashboard"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>

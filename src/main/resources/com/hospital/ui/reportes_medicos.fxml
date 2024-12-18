@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ReportesMedicosController">
+
+    <!-- Título -->
+    <Label text="Reportes Médicos" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+    <!-- Estadísticas Generales -->
+    <HBox spacing="20" alignment="CENTER">
+        <Label text="Total de Pacientes:"/>
+        <Label fx:id="lblTotalPacientes" text="0" style="-fx-font-weight: bold;"/>
+
+        <Label text="Consultas del Mes:"/>
+        <Label fx:id="lblConsultasMes" text="0" style="-fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Tabla de Alertas de Signos Vitales -->
+    <TableView fx:id="tablaAlertas" prefWidth="700" prefHeight="200">
+        <columns>
+            <TableColumn text="Paciente" fx:id="colPaciente"/>
+            <TableColumn text="Frecuencia Cardíaca" fx:id="colFrecuenciaCardiaca"/>
+            <TableColumn text="Presión Arterial" fx:id="colPresionArterial"/>
+            <TableColumn text="Temperatura" fx:id="colTemperatura"/>
+            <TableColumn text="Alerta" fx:id="colAlerta"/>
+        </columns>
+    </TableView>
+
+    <!-- Gráfico de Evolución de Signos Vitales -->
+    <Label text="Evolución de Signos Vitales" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+    <LineChart fx:id="graficoEvolucion" prefWidth="700" prefHeight="300">
+        <xAxis>
+            <CategoryAxis label="Fecha"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Valores"/>
+        </yAxis>
+    </LineChart>
+
+    <!-- Botones -->
+    <HBox spacing="10" alignment="CENTER">
+      
+        <Button text="Configurar Alertas" onAction="#configurarAlertas"/>
+
+        <Button text="Regresar al Menú Principal" onAction="#volverDashboard"/>
+    </HBox>
+</VBox>

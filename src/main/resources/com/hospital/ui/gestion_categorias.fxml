@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.GestionCategoriasController">
+    <Label text="Gestión de Categorías" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="txtNuevaCategoria" promptText="Nueva Categoría" prefWidth="200"/>
+        <Button text="Agregar" onAction="#agregarCategoria" />
+        <Button text="Eliminar" onAction="#eliminarCategoria" />
+    </HBox>
+    
+    <TableView fx:id="tablaCategorias" prefWidth="300" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="280" />
+        </columns>
+    </TableView>
+
+    <!-- Botón para regresar al Dashboard -->
+    <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard" style="-fx-background-color: #42A5F5; -fx-text-fill: white;"/>
+</VBox>

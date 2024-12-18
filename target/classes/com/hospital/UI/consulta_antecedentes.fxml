@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaAntecedentesController">
+    <Label text="Consulta de Antecedentes" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="txtBuscarPaciente" promptText="Cédula o Nombre del Paciente" prefWidth="250"/>
+        <Button text="Buscar" onAction="#buscarAntecedentes" />
+    </HBox>
+
+    <TableView fx:id="tablaAntecedentes" prefWidth="400" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colAntecedente" text="Antecedente" prefWidth="380" />
+        </columns>
+    </TableView>
+   <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard"
+        style="-fx-background-color: #42A5F5; -fx-text-fill: white;"/>
+
+</VBox>

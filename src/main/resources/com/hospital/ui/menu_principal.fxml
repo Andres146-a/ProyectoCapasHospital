@@ -1,0 +1,10 @@
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.UI.MainController">
+    <children>
+        <VBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50">
+            <Label text="Menú Principal" style="-fx-font-size: 20px;"/>
+            <Button text="Gestión de Pacientes" onAction="#mostrarGestionPacientes" />
+            <Button text="Gestión de Enfermeros" onAction="#mostrarGestionEnfermeros" />
+            <Button text="Gestión de Signos Vitales" onAction="#mostrarSignosVitales" />
+        </VBox>
+    </children>
+</AnchorPane>

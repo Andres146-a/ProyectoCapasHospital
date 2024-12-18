@@ -58,3 +58,29 @@
     -fx-font-weight: bold;
     -fx-text-fill: #2E8B57;
 }
+
+.option-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.option-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.dashboard-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.dashboard-button:hover {
+    -fx-background-color: #1976D2;
+}

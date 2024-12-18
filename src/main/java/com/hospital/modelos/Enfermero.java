@@ -1,11 +1,14 @@
 package com.hospital.modelos;
 
-public class Enfermero {
-    private int id;
-    private String nombre;
-    private String especialidad;
+import javafx.beans.property.*;
 
-    public Enfermero(int id, String nombre, String especialidad) {
+public class Enfermero {
+    private final IntegerProperty id;
+    private final StringProperty nombre;
+    private final StringProperty especialidad;
+    private final StringProperty estado; // Nuevo campo: Estado (Disponible u Ocupado)
+
+    public Enfermero(int id, String nombre, String especialidad, String estado) {
         if (id <= 0) {
             throw new IllegalArgumentException("El ID debe ser mayor que 0.");
         }
@@ -15,45 +18,81 @@ public class Enfermero {
         if (especialidad == null || especialidad.isEmpty()) {
             throw new IllegalArgumentException("La especialidad no puede estar vacía.");
         }
-        this.id = id;
-        this.nombre = nombre;
-        this.especialidad = especialidad;
+        if (estado == null || estado.isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío.");
+        }
+
+        this.id = new SimpleIntegerProperty(id);
+        this.nombre = new SimpleStringProperty(nombre);
+        this.especialidad = new SimpleStringProperty(especialidad);
+        this.estado = new SimpleStringProperty(estado);
     }
 
-    // Getters y Setters
+    // Getters para ID
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(int id) {
         if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
-        this.id = id;
+        this.id.set(id);
     }
 
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    // Getters para Nombre
     public String getNombre() {
-        return nombre;
+        return nombre.get();
     }
 
     public void setNombre(String nombre) {
         if (nombre == null || nombre.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío.");
         }
-        this.nombre = nombre;
+        this.nombre.set(nombre);
     }
 
+    public StringProperty nombreProperty() {
+        return nombre;
+    }
+
+    // Getters para Especialidad
     public String getEspecialidad() {
-        return especialidad;
+        return especialidad.get();
     }
 
     public void setEspecialidad(String especialidad) {
         if (especialidad == null || especialidad.isEmpty()) {
             throw new IllegalArgumentException("La especialidad no puede estar vacía.");
         }
-        this.especialidad = especialidad;
+        this.especialidad.set(especialidad);
+    }
+
+    public StringProperty especialidadProperty() {
+        return especialidad;
+    }
+
+    // Getters para Estado
+    public String getEstado() {
+        return estado.get();
+    }
+
+    public void setEstado(String estado) {
+        if (estado == null || estado.isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío.");
+        }
+        this.estado.set(estado);
+    }
+
+    public StringProperty estadoProperty() {
+        return estado;
     }
 
     @Override
     public String toString() {
-        return "Enfermero{id=" + id + ", nombre='" + nombre + "', especialidad='" + especialidad + "'}";
+        return "Enfermero{id=" + id.get() + ", nombre='" + nombre.get() +
+                "', especialidad='" + especialidad.get() + "', estado='" + estado.get() + "'}";
     }
 }

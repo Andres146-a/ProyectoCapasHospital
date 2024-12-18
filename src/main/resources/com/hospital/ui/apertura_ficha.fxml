@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.hospital.UI.AperturaFichaController">
+    
+    <Label text="Apertura de Ficha Médica" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <!-- Botones para las opciones -->
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Gestión de Categorías" onAction="#gestionarCategorias" styleClass="option-button"/>
+        <Button text="Ingreso de Pacientes" onAction="#ingresarPacientes" styleClass="option-button"/>
+        <Button text="Consulta de Antecedentes" onAction="#consultarAntecedentes" styleClass="option-button"/>
+    </HBox>
+    
+    <!-- Botón para regresar al dashboard -->
+    <Button text="Regresar al Dashboard" onAction="#regresarDashboard" styleClass="dashboard-button"/>
+</VBox>

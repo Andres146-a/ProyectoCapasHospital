@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ResumenPacienteController">
+    <Label text="Resumen del Paciente" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <VBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="lblNombrePaciente" text="Nombre:" style="-fx-font-size: 14;"/>
+        <Label fx:id="lblEdadPaciente" text="Edad:" style="-fx-font-size: 14;"/>
+        <Label fx:id="lblAntecedentes" text="Antecedentes:" style="-fx-font-size: 14;"/>
+        <Label fx:id="lblSignosVitales" text="Signos Vitales Recientes:" style="-fx-font-size: 14;"/>
+        <Label fx:id="lblUltimaConsulta" text="Última Consulta:" style="-fx-font-size: 14;"/>
+        <Label fx:id="lblTratamientos" text="Tratamientos Actuales:" style="-fx-font-size: 14;"/>
+    </VBox>
+
+    <Button text="Regresar al Menú Principal" onAction="#regresarDashboard" style="-fx-background-color: #00bfff; -fx-text-fill: white;"/>
+</VBox>

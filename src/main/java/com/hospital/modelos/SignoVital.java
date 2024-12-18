@@ -1,48 +1,46 @@
 package com.hospital.modelos;
 
+import javafx.beans.property.*;
+
 public class SignoVital {
-    private int id;
-    private String nombre;
-    private String valorNormal;
+    private final IntegerProperty id;
+    private final StringProperty frecuenciaCardiaca;
+    private final StringProperty presionArterial;
+    private final StringProperty temperatura;
+    private final StringProperty frecuenciaRespiratoria;
+    private final StringProperty oxigenacion;
+    private final StringProperty fechaHora;
 
-    public SignoVital(int id, String nombre, String valorNormal) {
-        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
-        if (nombre == null || nombre.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        if (valorNormal == null || valorNormal.isEmpty()) throw new IllegalArgumentException("El valor normal no puede estar vacío.");
-        this.id = id;
-        this.nombre = nombre;
-        this.valorNormal = valorNormal;
+    public SignoVital(int id, String frecuenciaCardiaca, String presionArterial, 
+                      String temperatura, String frecuenciaRespiratoria, String oxigenacion, String fechaHora) {
+        this.id = new SimpleIntegerProperty(id);
+        this.frecuenciaCardiaca = new SimpleStringProperty(frecuenciaCardiaca);
+        this.presionArterial = new SimpleStringProperty(presionArterial);
+        this.temperatura = new SimpleStringProperty(temperatura);
+        this.frecuenciaRespiratoria = new SimpleStringProperty(frecuenciaRespiratoria);
+        this.oxigenacion = new SimpleStringProperty(oxigenacion);
+        this.fechaHora = new SimpleStringProperty(fechaHora);
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters y Properties
+    public int getId() { return id.get(); }
+    public IntegerProperty idProperty() { return id; }
 
-    public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("El ID debe ser mayor que 0.");
-        this.id = id;
-    }
+    public String getFrecuenciaCardiaca() { return frecuenciaCardiaca.get(); }
+    public StringProperty frecuenciaCardiacaProperty() { return frecuenciaCardiaca; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getPresionArterial() { return presionArterial.get(); }
+    public StringProperty presionArterialProperty() { return presionArterial; }
 
-    public void setNombre(String nombre) {
-        if (nombre == null || nombre.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        this.nombre = nombre;
-    }
+    public String getTemperatura() { return temperatura.get(); }
+    public StringProperty temperaturaProperty() { return temperatura; }
 
-    public String getValorNormal() {
-        return valorNormal;
-    }
+    public String getFrecuenciaRespiratoria() { return frecuenciaRespiratoria.get(); }
+    public StringProperty frecuenciaRespiratoriaProperty() { return frecuenciaRespiratoria; }
 
-    public void setValorNormal(String valorNormal) {
-        if (valorNormal == null || valorNormal.isEmpty()) throw new IllegalArgumentException("El valor normal no puede estar vacío.");
-        this.valorNormal = valorNormal;
-    }
+    public String getOxigenacion() { return oxigenacion.get(); }
+    public StringProperty oxigenacionProperty() { return oxigenacion; }
 
-    @Override
-    public String toString() {
-        return "SignoVital{id=" + id + ", nombre='" + nombre + "', valorNormal='" + valorNormal + "'}";
-    }
+    public String getFechaHora() { return fechaHora.get(); }
+    public StringProperty fechaHoraProperty() { return fechaHora; }
 }
