@@ -7,7 +7,7 @@ import com.hospital.repositorios.BaseController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.hospital.repositorios.BaseController;
+// import com.hospital.repositorios.BaseController;
 public class GestionCategoriasController extends  BaseController{
 
     @FXML private TableView<String> tablaCategorias;

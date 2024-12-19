@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaMedicaController">
-    <Label text="Consultas Médicas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaMedicaController">
+    <Label text="Consulta Médica" style="-fx-font-size: 24; -fx-font-weight: bold;" />
 
-    <TableView fx:id="consultasTable" prefHeight="400" onMouseClicked="#volverDashboard">
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="txtBuscarNombre" promptText="Buscar por Nombre" />
+        <TextField fx:id="txtBuscarEnfermedad" promptText="Buscar por Enfermedad" />
+        <Button text="Buscar" onAction="#filtrarPacientes" />
+    </HBox>
+
+    <TableView fx:id="pacientesTable" prefWidth="700" prefHeight="300">
         <columns>
-            <TableColumn text="ID" fx:id="idColumn" prefWidth="100"/>
-            <TableColumn text="Paciente" fx:id="pacienteColumn" prefWidth="150"/>
-            <TableColumn text="Doctor" fx:id="doctorColumn" prefWidth="150"/>
-            <TableColumn text="Fecha" fx:id="fechaColumn" prefWidth="150"/>
-            <TableColumn text="Descripción" fx:id="descripcionColumn" prefWidth="200"/>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colNombre" text="Paciente" prefWidth="150" />
+            <TableColumn fx:id="colFechaIngreso" text="Fecha de Ingreso" prefWidth="120" />
+            <TableColumn fx:id="colEnfermedad" text="Enfermedad" prefWidth="150" />
+            <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="100" />
+            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="150" />
         </columns>
     </TableView>
-    <HBox spacing="10" alignment="CENTER_RIGHT">
-    <Button text="Regresar" 
-            onAction="#volverDashboard" 
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-</HBox>
 
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Ver Resumen del Paciente" onAction="#mostrarResumenPaciente" />
+        <Button text="Exportar a PDF" onAction="#exportarHistorialPDF" />
+        <Button text="Regresar al Menú Principal" onAction="#volverDashboard" />
+    </HBox>
 </VBox>

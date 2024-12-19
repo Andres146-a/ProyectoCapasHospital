@@ -7,11 +7,57 @@
     -fx-background-color: #2E8B57;
     -fx-padding: 10;
 }
+/* Asegura que las tarjetas estén bien alineadas */
+.dashboard-container {
+    -fx-padding: 20;
+    -fx-spacing: 15; /* Espacio entre tarjetas */
+    -fx-alignment: center;
+}
+.option-button {
+    -fx-font-size: 16px;
+    -fx-background-color: #2E8B57; /* Verde oscuro */
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+}
+/* Sección de alertas */
+.alert-section {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #2E8B57;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+/* Texto dentro de las alertas */
+.alert-item {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
+
+.option-button:hover {
+    -fx-background-color: #45a049;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-transition: all 0.3s ease;
+}
 
 .header-label {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+}
+/* Estilo para el título principal */
+.title-label {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E8B57; /* Verde para resaltar */
+    -fx-padding: 20 0 20 0;
+    -fx-text-alignment: center;
 }
 
 /* Tarjetas */

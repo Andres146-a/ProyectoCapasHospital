@@ -2,15 +2,15 @@ package com.hospital.UI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+// import javafx.fxml.FXMLLoader;
+// import javafx.scene.Node;
+// import javafx.scene.Parent;
+// import javafx.scene.Scene;
+// import javafx.stage.Modality;
+// import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
+// import java.io.IOException;
+// import java.util.ArrayList;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,15 +18,16 @@ import javafx.collections.ObservableList;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
+// import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import com.hospital.modelos.Paciente;
+import com.hospital.repositorios.BaseController;
 
 
-public class ReportesMedicosController {
+public class ReportesMedicosController extends BaseController{
 
     @FXML private Label lblTotalPacientes;
     @FXML private Label lblConsultasMes;
@@ -48,51 +49,51 @@ public class ReportesMedicosController {
     /**
      * Método para verificar los signos vitales y generar una alerta si es necesario.
      */
-    private String verificarSignosVitales(Paciente p) {
-        StringBuilder alerta = new StringBuilder();
+    // private String verificarSignosVitales(Paciente p) {
+    //     StringBuilder alerta = new StringBuilder();
     
-        // Verificar presión arterial
-        String[] presion = p.getPresionArterial().split("/");
-        if (Integer.parseInt(presion[0]) > 140 || Integer.parseInt(presion[1]) > 90) {
-            alerta.append("Hipertensión ");
-        }
+    //     // Verificar presión arterial
+    //     String[] presion = p.getPresionArterial().split("/");
+    //     if (Integer.parseInt(presion[0]) > 140 || Integer.parseInt(presion[1]) > 90) {
+    //         alerta.append("Hipertensión ");
+    //     }
     
-        // Verificar frecuencia cardíaca
-        int frecuencia = Integer.parseInt(p.getFrecuenciaCardiaca().replace(" lpm", ""));
-        if (frecuencia < 60) {
-            alerta.append("Bradicardia ");
-        } else if (frecuencia > 100) {
-            alerta.append("Taquicardia ");
-        }
+    //     // Verificar frecuencia cardíaca
+    //     int frecuencia = Integer.parseInt(p.getFrecuenciaCardiaca().replace(" lpm", ""));
+    //     if (frecuencia < 60) {
+    //         alerta.append("Bradicardia ");
+    //     } else if (frecuencia > 100) {
+    //         alerta.append("Taquicardia ");
+    //     }
     
-        // Verificar temperatura
-        double temperatura = Double.parseDouble(p.getTemperatura().replace("°C", ""));
-        if (temperatura > 38) {
-            alerta.append("Fiebre ");
-        }
+    //     // Verificar temperatura
+    //     double temperatura = Double.parseDouble(p.getTemperatura().replace("°C", ""));
+    //     if (temperatura > 38) {
+    //         alerta.append("Fiebre ");
+    //     }
     
-        return alerta.toString().trim(); // Devuelve la alerta acumulada
-    }
+    //     return alerta.toString().trim(); // Devuelve la alerta acumulada
+    // }
     
     /**
      * Simula la obtención de una lista de pacientes.
      */
-    private ObservableList<Paciente> obtenerListaPacientes() {
-        // Simulamos una lista de pacientes (normalmente vendría de la base de datos)
-        return FXCollections.observableArrayList(
-            new Paciente(1, "Juan", "Pérez", 30, "Hipertensión", "85 lpm", "150/95", "37.5°C", ""),
-            new Paciente(2, "María", "López", 25, "Gastritis", "95 lpm", "130/85", "38.2°C", ""),
-            new Paciente(3, "Carlos", "González", 40, "Hipertensión", "50 lpm", "120/80", "36.8°C", "")
-        );
-    }
+    // private ObservableList<Paciente> obtenerListaPacientes() {
+    //     // Simulamos una lista de pacientes (normalmente vendría de la base de datos)
+    //     return FXCollections.observableArrayList(
+    //         new Paciente(1, "Juan", "Pérez", 30, "Hipertensión", "85 lpm", "150/95", "37.5°C", ""),
+    //         new Paciente(2, "María", "López", 25, "Gastritis", "95 lpm", "130/85", "38.2°C", ""),
+    //         new Paciente(3, "Carlos", "González", 40, "Hipertensión", "50 lpm", "120/80", "36.8°C", "")
+    //     );
+    // }
     
     /**
      * Simula la obtención del MainController.
      */
-    private MainController obtenerMainController() {
-        // Aquí deberías obtener la referencia del MainController (puedes usar inyección de dependencia si es necesario)
-        return null;
-    }
+    // private MainController obtenerMainController() {
+    //     // Aquí deberías obtener la referencia del MainController (puedes usar inyección de dependencia si es necesario)
+    //     return null;
+    // }
     
     
     @FXML
@@ -162,21 +163,20 @@ public class ReportesMedicosController {
     
 
     @FXML
-    private void volverDashboard(ActionEvent event) {
+    private void regresarAlDashboard() {
         if (mainController != null) {
             mainController.restaurarContenidoPrincipal();
         } else {
-            System.out.println("Error: MainController no está inicializado.");
+            System.out.println("Error: MainController no está configurado.");
         }
     }
     
-    
-    private void mostrarMensaje(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(titulo);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+    // private void mostrarMensaje(String titulo, String mensaje) {
+    //     Alert alert = new Alert(Alert.AlertType.ERROR);
+    //     alert.setTitle(titulo);
+    //     alert.setContentText(mensaje);
+    //     alert.showAndWait();
+    // }
     
 
     private void cargarGraficoEvolucion() {
@@ -192,11 +192,11 @@ public class ReportesMedicosController {
     }
 
     public void setMainController(MainController mainController) {
-        this.mainController = App.getMainController(); // Obtiene la instancia única de MainController
-        if (this.mainController != null) {
-            System.out.println("MainController asignado correctamente.");
+        this.mainController = mainController;
+        if (mainController != null) {
+            System.out.println("MainController asignado correctamente en ReportesMedicosController.");
         } else {
-            System.out.println("Error: MainController sigue siendo null.");
+            System.out.println("Error: MainController es null en ReportesMedicosController.");
         }
     }
     

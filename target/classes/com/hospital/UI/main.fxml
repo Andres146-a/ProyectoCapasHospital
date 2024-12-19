@@ -11,7 +11,8 @@
 
     <!-- Encabezado -->
     <top>
-        <Label text="Hospital Management System" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-padding: 10; -fx-alignment: center;"/>
+        <Label text="Hospital Management System" styleClass="title-label"/>
+
     </top>
 
     <!-- Contenido Dinámico -->
@@ -53,16 +54,19 @@
                     <Button text="Apertura de Ficha Médica" onAction="#mostrarAperturaFichaMedica"/>
                     <Button text="Toma de Signos" onAction="#mostrarTomaSignos"/>
                     <Button text="Consulta Médica" onAction="#mostrarConsultaMedica"/>
-                    <Button text="Historial de Pacientes" onAction="#mostrarHistorialPacientes"/>
+                    <!-- <Button text="Historial de Pacientes" onAction="#mostrarHistorialPacientes"/> -->
                     <Button text="Reportes Médicos" onAction="#mostrarReportesMedicos"/>
                 </HBox>
 
 
                 <!-- Alertas Importantes -->
-                <VBox fx:id="alertasImportantes" spacing="10" alignment="CENTER" style="-fx-border-color: lightblue; -fx-padding: 10;">
-                    <Label text="⚠ Alertas Importantes" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: green;" />
-                    <ListView fx:id="listAlertas" prefHeight="150" prefWidth="500"/>
-                </VBox>
+               <VBox styleClass="alert-section">
+    <Label text="⚠️ Alertas Importantes" styleClass="dashboard-alert-title"/>
+    <Label text="Juan Pérez: Hipertensión" styleClass="alert-item"/>
+    <Label text="María López: Fiebre" styleClass="alert-item"/>
+    <Label text="Carlos González: Bradicardia" styleClass="alert-item"/>
+</VBox>
+
             </VBox>
         </StackPane>
     </center>

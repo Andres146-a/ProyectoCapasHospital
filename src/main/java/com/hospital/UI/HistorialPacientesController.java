@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 import com.hospital.modelos.Paciente;
 import javafx.scene.control.*;
-
+ 
 public class HistorialPacientesController {
 
     @FXML private TableView<Paciente> pacientesTable;

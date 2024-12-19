@@ -7,15 +7,34 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import com.hospital.repositorios.BaseController;
 import java.io.IOException;
-
+import javafx.scene.Node;  
 public class AperturaFichaController {
 
     private MainController mainController; // Referencia al MainController
-
+    private StackPane contenidoPrincipal;
+    private Node vistaPrincipal;
+    
+    @FXML
+    public void initialize() {
+        if (contenidoPrincipal != null && !contenidoPrincipal.getChildren().isEmpty()) {
+            vistaPrincipal = contenidoPrincipal.getChildren().get(0); // Guarda la vista inicial
+        } else {
+            System.out.println("Error: contenidoPrincipal está vacío o es null.");
+        }
+    }
+  
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
-
+    
+    public void restaurarContenidoPrincipal() {
+        if (contenidoPrincipal != null && vistaPrincipal != null) {
+            contenidoPrincipal.getChildren().setAll(vistaPrincipal);
+        } else {
+            System.out.println("Error: No se pudo restaurar el contenido principal porque contenidoPrincipal o vistaPrincipal es null.");
+        }
+    }
+    
     @FXML
     private void gestionarCategorias() {
         System.out.println("Abriendo Gestión de Categorías de Antecedentes...");

@@ -7,12 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
 import com.hospital.modelos.Paciente;
+import com.hospital.repositorios.BaseController;
 
 public class MainController {
 
@@ -23,15 +26,13 @@ private Node vistaPrincipal;
 
 @FXML
 public void initialize() {
-    System.out.println("Controlador actual: " + this);
-
-    System.out.println("contenidoPrincipal: " + contenidoPrincipal);
     if (contenidoPrincipal != null && !contenidoPrincipal.getChildren().isEmpty()) {
         vistaPrincipal = contenidoPrincipal.getChildren().get(0); // Guarda la vista inicial
     } else {
         System.out.println("Error: contenidoPrincipal está vacío o null.");
     }
 }
+
 
 
 @FXML
@@ -88,14 +89,14 @@ public void mostrarTomaSignos() {
         System.out.println("Error: contenidoPrincipal es null.");
     }
 }
-@FXML
-public void mostrarHistorialPacientes() {
-    if (contenidoPrincipal != null) {
-        cargarVista("/com/hospital/ui/historial_pacientes.fxml");
-    } else {
-        System.out.println("Error: contenidoPrincipal es null.");
-    }
-}
+// @FXML
+// public void mostrarHistorialPacientes() {
+//     if (contenidoPrincipal != null) {
+//         cargarVista("/com/hospital/ui/historial_pacientes.fxml");
+//     } else {
+//         System.out.println("Error: contenidoPrincipal es null.");
+//     }
+// }
 @FXML
 public void mostrarEnfermerosDisponibles() {
     try {
@@ -130,14 +131,34 @@ public void mostrarPacientesActivos() {
         e.printStackTrace();
     }
 }
-
-
-private void mostrarMensaje(String titulo, String mensaje) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle(titulo);
-    alert.setContentText(mensaje);
-    alert.showAndWait();
+public void eliminarAlertaManual(Paciente paciente) {
+    alertasImportantes.getChildren().removeIf(node -> {
+        if (node instanceof Label) {
+            Label label = (Label) node;
+            return label.getText().contains(paciente.getNombre() + " " + paciente.getApellido());
+        }
+        return false;
+    });
+    System.out.println("Alerta manual eliminada: " + paciente.getNombre() + " " + paciente.getApellido());
 }
+
+public void eliminarAlertaAutomatica(Paciente paciente) {
+    alertasImportantes.getChildren().removeIf(node -> {
+        if (node instanceof Label) {
+            Label label = (Label) node;
+            return label.getText().contains(paciente.getNombre() + " " + paciente.getApellido());
+        }
+        return false;
+    });
+    System.out.println("Alerta automática eliminada: " + paciente.getNombre() + " " + paciente.getApellido());
+}
+
+// private void mostrarMensaje(String titulo, String mensaje) {
+//     Alert alert = new Alert(Alert.AlertType.ERROR);
+//     alert.setTitle(titulo);
+//     alert.setContentText(mensaje);
+//     alert.showAndWait();
+// }
 
 
 @FXML
@@ -166,6 +187,8 @@ public void agregarTomaSignos() {
     System.out.println("Método agregarTomaSignos ejecutado");
     // Implementa la lógica que necesites aquí
 }
+
+
 @FXML
 public void mostrarConsultasHoy() {
     try {
@@ -183,6 +206,7 @@ public void mostrarConsultasHoy() {
         e.printStackTrace();
     }
 }
+
 
 @FXML
 public void mostrarConsultaMedica() {
@@ -215,27 +239,43 @@ public void agregarAlerta(ObservableList<Paciente> alertas) {
 }
 
 public void actualizarAlertasImportantes(ObservableList<Paciente> alertas) {
-    // Elimina solo las alertas, pero deja el título intacto
-    if (alertasImportantes.getChildren().size() > 1) {
-        alertasImportantes.getChildren().remove(1, alertasImportantes.getChildren().size());
-    }
+    alertasImportantes.getChildren().clear(); // Limpiar alertas anteriores
 
     for (Paciente p : alertas) {
+        HBox alertaBox = new HBox(10); // Contenedor horizontal para la alerta y el botón
         Label alertaLabel = new Label("⚠ " + p.getNombre() + " " + p.getApellido() + ": " + p.getAlerta());
         alertaLabel.setStyle("-fx-text-fill: red; -fx-font-size: 14px;");
-        alertasImportantes.getChildren().add(alertaLabel);
+
+        // Botón para eliminar la alerta
+        Button btnEliminar = new Button("Eliminar");
+        btnEliminar.setOnAction(event -> {
+            System.out.println("Alerta manual eliminada: " + p.getNombre() + " " + p.getApellido());
+            alertas.remove(p); // Eliminar de la lista
+            actualizarAlertasImportantes(alertas); // Actualizar la vista
+        });
+
+        // Añadir etiqueta y botón al contenedor horizontal
+        alertaBox.getChildren().addAll(alertaLabel, btnEliminar);
+
+        // Añadir el contenedor al VBox principal
+        alertasImportantes.getChildren().add(alertaBox);
     }
+}
+
+public void pacienteAtendido(Paciente paciente) {
+    eliminarAlertaAutomatica(paciente);
+    System.out.println("Paciente atendido: " + paciente.getNombre() + " " + paciente.getApellido());
 }
 
 
 private void cargarVista(String rutaFXML) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
-        
-        // Configura el controlador existente para evitar duplicados
+
+        // Configura el controlador existente para evitar múltiples instancias del MainController
         loader.setControllerFactory(controllerClass -> {
             if (controllerClass == MainController.class) {
-                return this; // Reutiliza la instancia actual del controlador
+                return this; // Reutiliza la instancia actual del MainController
             } else {
                 try {
                     return controllerClass.getDeclaredConstructor().newInstance();
@@ -245,25 +285,34 @@ private void cargarVista(String rutaFXML) {
             }
         });
 
-        Node vista = loader.load();
+        Parent vista = loader.load();
+
+        // Configurar el controlador de la vista cargada
+        Object controlador = loader.getController();
+        if (controlador instanceof BaseController) {
+            ((BaseController) controlador).setMainController(this);
+        }
+
+        // Cargar la vista en el StackPane del MainController
         contenidoPrincipal.getChildren().setAll(vista);
 
     } catch (IOException e) {
-        mostrarError("Error al cargar la vista: " + rutaFXML);
         e.printStackTrace();
+        mostrarError("Error al cargar la vista: " + rutaFXML);
     }
-    
 }
 
 
-   
-    public void restaurarContenidoPrincipal() {
-        if (vistaPrincipal != null) {
-            contenidoPrincipal.getChildren().setAll(vistaPrincipal);
-        } else {
-            System.out.println("Error: vistaPrincipal es null.");
-        }
+
+public void restaurarContenidoPrincipal() {
+    if (vistaPrincipal != null) {
+        contenidoPrincipal.getChildren().setAll(vistaPrincipal);
+    } else {
+        System.out.println("Error: vistaPrincipal es null.");
     }
+}
+
+
     
     private void mostrarError(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
