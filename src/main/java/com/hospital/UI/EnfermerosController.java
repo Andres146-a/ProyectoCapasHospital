@@ -1,6 +1,7 @@
 package com.hospital.UI;
 
 import com.hospital.modelos.Enfermero;
+import com.hospital.negocio.EnfermeroFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +23,9 @@ public class EnfermerosController {
     @FXML private TableColumn<Enfermero, String> estadoColumn;
 
     private final ObservableList<Enfermero> enfermeros = FXCollections.observableArrayList();
+    
+    // Instancia de la fachada
+    private final EnfermeroFacade enfermeroFacade = new EnfermeroFacade();
 
     @FXML
     public void initialize() {
@@ -34,8 +38,8 @@ public class EnfermerosController {
         // Asignar la lista a la tabla
         enfermerosTable.setItems(enfermeros);
 
-        // Cargar datos de ejemplo
-        cargarDatosPrueba();
+        // Cargar datos desde la base de datos
+        cargarEnfermerosDesdeBD();
     }
 
     @FXML
@@ -48,10 +52,41 @@ public class EnfermerosController {
             return;
         }
 
-        Enfermero nuevoEnfermero = new Enfermero(enfermeros.size() + 1, nombre, especialidad, "Disponible");
-        enfermeros.add(nuevoEnfermero);
-        mostrarMensaje("Éxito", "Enfermero agregado correctamente.");
-        limpiarCampos();
+        try {
+            Enfermero nuevoEnfermero = new Enfermero(0, nombre, especialidad, "Disponible");
+            enfermeroFacade.guardarEnfermero(nuevoEnfermero);
+            cargarEnfermerosDesdeBD(); // Refrescar la tabla después de agregar
+            mostrarMensaje("Éxito", "Enfermero agregado correctamente.");
+            limpiarCampos();
+        } catch (Exception e) {
+            mostrarMensaje("Error", "No se pudo agregar el enfermero: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void eliminarEnfermero() {
+        Enfermero seleccionado = enfermerosTable.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarMensaje("Advertencia", "Seleccione un enfermero para eliminar.");
+            return;
+        }
+
+        try {
+            enfermeroFacade.eliminarEnfermero(seleccionado.getId());
+            cargarEnfermerosDesdeBD(); // Refrescar la tabla después de eliminar
+            mostrarMensaje("Éxito", "Enfermero eliminado correctamente.");
+        } catch (Exception e) {
+            mostrarMensaje("Error", "No se pudo eliminar el enfermero: " + e.getMessage());
+        }
+    }
+
+    private void cargarEnfermerosDesdeBD() {
+        try {
+            enfermeros.clear();
+            enfermeros.addAll(enfermeroFacade.listarEnfermeros());
+        } catch (Exception e) {
+            mostrarMensaje("Error", "No se pudieron cargar los enfermeros: " + e.getMessage());
+        }
     }
 
     private void mostrarMensaje(String titulo, String mensaje) {
@@ -64,11 +99,5 @@ public class EnfermerosController {
     private void limpiarCampos() {
         nombreField.clear();
         especialidadField.clear();
-    }
-
-    private void cargarDatosPrueba() {
-        enfermeros.add(new Enfermero(1, "Ana Torres", "Pediatría", "Disponible"));
-        enfermeros.add(new Enfermero(2, "Luis Ramírez", "Urgencias", "Ocupado"));
-        enfermeros.add(new Enfermero(3, "María Gómez", "Cardiología", "Disponible"));
     }
 }

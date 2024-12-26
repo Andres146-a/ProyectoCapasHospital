@@ -2,9 +2,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.hospital.UI.EnfermerosDisponiblesController">
     <Label text="Enfermeros Disponibles" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TextField fx:id="searchField" promptText="Buscar por nombre o especialidad..." />
     <TableView fx:id="enfermerosTable" prefWidth="600">
         <columns>
             <TableColumn text="ID" fx:id="idColumn" prefWidth="100"/>
@@ -14,4 +15,9 @@
         </columns>
     </TableView>
     <Button text="Regresar al Dashboard" onAction="#regresarDashboard"/>
+    <HBox spacing="10" alignment="CENTER">
+        <ComboBox fx:id="estadoComboBox" prefWidth="150" onAction="#filtrarEnfermeros"/>
+        <Button fx:id="actualizarEstadoButton" text="Actualizar Estado" onAction="#cambiarEstadoEnfermero"
+                style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+    </HBox>
 </VBox>

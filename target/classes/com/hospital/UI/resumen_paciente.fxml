@@ -7,6 +7,7 @@
     <Label text="Resumen del Paciente" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
 
     <VBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="lblAlertas" layoutX="50" layoutY="300" text="Alertas"/>
         <Label fx:id="lblNombrePaciente" text="Nombre:" style="-fx-font-size: 14;"/>
         <Label fx:id="lblEdadPaciente" text="Edad:" style="-fx-font-size: 14;"/>
         <Label fx:id="lblAntecedentes" text="Antecedentes:" style="-fx-font-size: 14;"/>

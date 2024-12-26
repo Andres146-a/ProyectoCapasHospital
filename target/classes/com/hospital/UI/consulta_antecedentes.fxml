@@ -3,20 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaAntecedentesController">
-    <Label text="Consulta de Antecedentes" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.hospital.UI.ConsultaAntecedentesController" style="-fx-padding: 20; -fx-background-color: #f7f7f7;">
+    
+    <!-- Título Principal -->
+    <Label text="Consulta de Antecedentes" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #4a90e2;" />
 
-    <HBox spacing="10" alignment="CENTER">
-        <TextField fx:id="txtBuscarPaciente" promptText="Cédula o Nombre del Paciente" prefWidth="250"/>
-        <Button text="Buscar" onAction="#buscarAntecedentes" />
+    <!-- Barra de Búsqueda -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <TextField fx:id="txtBuscarPaciente" promptText="Cédula o Nombre del Paciente" prefWidth="400" />
+        <Button text="Buscar" onAction="#buscarAntecedentes" style="-fx-background-color: #4a90e2; -fx-text-fill: white;" />
     </HBox>
 
-    <TableView fx:id="tablaAntecedentes" prefWidth="400" prefHeight="200">
+    <!-- Tabla de Antecedentes -->
+    <TableView fx:id="tablaAntecedentes" prefWidth="800" prefHeight="400">
         <columns>
-            <TableColumn fx:id="colAntecedente" text="Antecedente" prefWidth="380" />
+            <TableColumn fx:id="colAntecedente" text="Descripción del Antecedente" prefWidth="700" />
         </columns>
     </TableView>
-   <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard"
-        style="-fx-background-color: #42A5F5; -fx-text-fill: white;"/>
 
+    <!-- Botones de Acción -->
+    <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10;">
+        <Button text="Agregar" onAction="#agregarAntecedente" prefWidth="100" style="-fx-background-color: #4caf50; -fx-text-fill: white;" />
+        <Button text="Cargar Pacientes con Antecedentes" onAction="#cargarPacientesConAntecedentes" />
+
+        <Button text="Actualizar" onAction="#actualizarAntecedente" prefWidth="100" style="-fx-background-color: #ff9800; -fx-text-fill: white;" />
+        <Button text="Eliminar" onAction="#eliminarAntecedente" prefWidth="100" style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+        <Button text="Regresar al Menú Principal" onAction="#regresarAlDashboard" prefWidth="200" style="-fx-background-color: #42a5f5; -fx-text-fill: white;" />
+    </HBox>
 </VBox>

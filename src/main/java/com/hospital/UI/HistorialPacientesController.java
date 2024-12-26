@@ -1,5 +1,9 @@
 package com.hospital.UI;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hospital.modelos.Consulta;
+import com.hospital.modelos.Paciente;
+import com.hospital.negocio.PacientesFacade;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,13 +13,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import com.hospital.modelos.Paciente;
-import javafx.scene.control.*;
- 
+
 public class HistorialPacientesController {
 
     @FXML private TableView<Paciente> pacientesTable;
@@ -27,21 +36,38 @@ public class HistorialPacientesController {
     @FXML private TextField txtBuscarEnfermedad;
 
     private ObservableList<Paciente> listaPacientes = FXCollections.observableArrayList();
+    private ObservableList<Consulta> listaConsultas = FXCollections.observableArrayList();
+    // Instancia de la fachada de pacientes
+    private final PacientesFacade pacientesFacade = new PacientesFacade();
 
     @FXML
     public void initialize() {
+        configurarColumnas();
+        cargarPacientesDesdeBaseDeDatos();
+    }
+    private void configurarColumnas() {
         colId.setCellValueFactory(data -> data.getValue().idProperty().asObject());
-        colNombre.setCellValueFactory(data -> data.getValue().nombreProperty());
-        colFechaIngreso.setCellValueFactory(data -> new SimpleStringProperty("2024-01-01"));
+        colNombre.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNombre() + " " + data.getValue().getApellido()));
+    
+        // Si no existe el método `getFechaIngreso`, puedes asignar un valor predeterminado o manejarlo dinámicamente.
+        colFechaIngreso.setCellValueFactory(data -> {
+            String fechaIngreso = "Fecha no disponible"; // Valor predeterminado
+            // Si tienes una lógica alternativa para calcular o establecer la fecha de ingreso, implementala aquí.
+            return new SimpleStringProperty(fechaIngreso);
+        });
+    
         colEnfermedad.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEnfermedades()));
+    }
+    
 
-        listaPacientes.addAll(
-            new Paciente(1, "Juan", "Pérez", 30, "Hipertensión", "85 lpm", "150/95", "37.5°C", "Alerta: Hipertensión"),
-            new Paciente(2, "María", "López", 25, "Gastritis", "95 lpm", "130/85", "38.2°C", "Alerta: Fiebre"),
-            new Paciente(3, "Carlos", "González", 40, "Hipertensión", "50 lpm", "120/80", "36.8°C", "Alerta: Bradicardia")
-        );
-
-        pacientesTable.setItems(listaPacientes);
+    private void cargarPacientesDesdeBaseDeDatos() {
+        try {
+            List<Paciente> pacientes = pacientesFacade.obtenerTodosLosPacientes();
+            listaPacientes.setAll(pacientes);
+            pacientesTable.setItems(listaPacientes);
+        } catch (Exception e) {
+            mostrarMensaje("Error", "No se pudieron cargar los pacientes: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -82,14 +108,49 @@ public class HistorialPacientesController {
         }
     }
 
-    @FXML
-    private void exportarHistorialPDF() {
-        System.out.println("Exportando historial a PDF...");
-        for (Paciente paciente : pacientesTable.getItems()) {
-            System.out.println("ID: " + paciente.getId() + ", Nombre: " + paciente.getNombre() + " " + paciente.getApellido());
+     @FXML
+private void exportarHistorialPDF() {
+    try {
+        List<Map<String, String>> data = listaConsultas.stream()
+            .map(c -> {
+                Map<String, String> item = new HashMap<>();
+                item.put("id", String.valueOf(c.getId()));
+                item.put("paciente", c.getPaciente().getNombre() + " " + c.getPaciente().getApellido());
+                item.put("fecha_ingreso", c.getFecha().toString());
+                item.put("enfermedad", c.getPaciente().getEnfermedades());
+                item.put("doctor", c.getDoctor());
+                item.put("descripcion", c.getDescripcion());
+                return item;
+            }).collect(Collectors.toList());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonData = objectMapper.writeValueAsString(data);
+
+        ProcessBuilder pb = new ProcessBuilder(
+            "python",
+            "C:\\Users\\Matias\\OneDrive\\UNIVERSIDAD\\4SEMESTRE\\Ingenieria del Software\\ProyectoCapasHospital\\hospital\\src\\main\\java\\com\\hospital\\UI",
+            jsonData
+        );
+        pb.redirectErrorStream(true);
+        Process process = pb.start();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
         }
-        mostrarMensaje("Exportar PDF", "El historial de pacientes se ha exportado correctamente.");
+
+        if (process.waitFor() == 0) {
+            mostrarMensaje("Exportar PDF", "El historial se ha exportado correctamente.");
+        } else {
+            mostrarMensaje("Error", "No se pudo exportar el historial.");
+        }
+    } catch (Exception e) {
+        mostrarMensaje("Error", "Ocurrió un error al exportar el historial.");
+        e.printStackTrace();
     }
+}
+
 
     private void mostrarMensaje(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

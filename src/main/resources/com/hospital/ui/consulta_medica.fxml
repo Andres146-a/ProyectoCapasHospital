@@ -3,29 +3,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaMedicaController">
-    <Label text="Consulta Médica" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.ConsultaMedicaController" style="-fx-padding: 20; -fx-background-color: #f7f7f7;">
+    
+    <!-- Título Principal -->
+    <Label text="Consulta Médica" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #4a90e2;" />
 
-    <HBox spacing="10" alignment="CENTER">
-        <TextField fx:id="txtBuscarNombre" promptText="Buscar por Nombre" />
-        <TextField fx:id="txtBuscarEnfermedad" promptText="Buscar por Enfermedad" />
-        <Button text="Buscar" onAction="#filtrarPacientes" />
+    <!-- Barra de Búsqueda -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <TextField fx:id="txtBuscarNombre" promptText="Buscar por Nombre" prefWidth="250" />
+        <TextField fx:id="txtBuscarEnfermedad" promptText="Buscar por Enfermedad" prefWidth="250" />
+        <Button text="Buscar" onAction="#filtrarConsultas" style="-fx-background-color: #4a90e2; -fx-text-fill: white;" />
     </HBox>
 
-    <TableView fx:id="pacientesTable" prefWidth="700" prefHeight="300">
-        <columns>
-            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
-            <TableColumn fx:id="colNombre" text="Paciente" prefWidth="150" />
-            <TableColumn fx:id="colFechaIngreso" text="Fecha de Ingreso" prefWidth="120" />
-            <TableColumn fx:id="colEnfermedad" text="Enfermedad" prefWidth="150" />
-            <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="100" />
-            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="150" />
-        </columns>
-    </TableView>
+    <!-- Tabla de Consultas -->
+   <TableView fx:id="consultasTable" prefWidth="800" prefHeight="400">
+    <columns>
+        <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+        <TableColumn fx:id="colPaciente" text="Paciente" prefWidth="200" />
+        <TableColumn fx:id="colFechaIngreso" text="Fecha de Ingreso" prefWidth="150" />
+        <TableColumn fx:id="colEnfermedad" text="Enfermedad" prefWidth="200" />
+        <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="100" />
+        <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="250" />
+    </columns>
+</TableView>
 
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Ver Resumen del Paciente" onAction="#mostrarResumenPaciente" />
-        <Button text="Exportar a PDF" onAction="#exportarHistorialPDF" />
-        <Button text="Regresar al Menú Principal" onAction="#volverDashboard" />
+
+    <!-- Información Adicional -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <Label text="Resultados Filtrados:" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+        <Label fx:id="lblResultados" text="0 resultados encontrados" style="-fx-font-size: 14;" />
+    </HBox>
+
+    <!-- Botones de Acción -->
+    <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10;">
+        <Button text="Ver Resumen del Paciente" onAction="#mostrarResumenPaciente" prefWidth="200" style="-fx-background-color: #4caf50; -fx-text-fill: white;" />
+        <Button text="Exportar a PDF" onAction="#exportarHistorialPDF" prefWidth="150" style="-fx-background-color: #ff9800; -fx-text-fill: white;" />
+        <Button text="Regresar al Menú Principal" onAction="#volverDashboard" prefWidth="200" style="-fx-background-color: #f44336; -fx-text-fill: white;" />
     </HBox>
 </VBox>

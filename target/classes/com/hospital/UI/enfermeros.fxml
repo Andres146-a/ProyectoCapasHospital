@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -22,4 +22,4 @@
         <Button text="Actualizar" onAction="#actualizarEnfermero"/>
         <Button text="Eliminar" onAction="#eliminarEnfermero"/>
     </HBox>
-</VBox>
+</VBox> -->

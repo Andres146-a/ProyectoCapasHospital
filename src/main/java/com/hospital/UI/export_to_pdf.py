@@ -24,21 +24,35 @@ def generate_pdf(data):
 
     pdf.chapter_title("Detalles de Consultas")
     for item in data:
-        pdf.chapter_body(f"ID: {item['id']}")
-        pdf.chapter_body(f"Paciente: {item['paciente']}")
-        pdf.chapter_body(f"Fecha de Ingreso: {item['fecha_ingreso']}")
-        pdf.chapter_body(f"Enfermedad: {item['enfermedad']}")
-        pdf.chapter_body(f"Doctor: {item['doctor']}")
-        pdf.chapter_body(f"Descripción: {item['descripcion']}")
+        pdf.chapter_body(f"ID: {item.get('id', 'N/A')}")
+        pdf.chapter_body(f"Paciente: {item.get('paciente', 'N/A')}")
+        pdf.chapter_body(f"Fecha de Ingreso: {item.get('fecha_ingreso', 'N/A')}")
+        pdf.chapter_body(f"Enfermedad: {item.get('enfermedad', 'N/A')}")
+        pdf.chapter_body(f"Doctor: {item.get('doctor', 'N/A')}")
+        pdf.chapter_body(f"Descripción: {item.get('descripcion', 'N/A')}")
         pdf.ln(10)
 
     pdf.output("consulta_medica.pdf")
     print("PDF generado exitosamente como 'consulta_medica.pdf'")
 
 if __name__ == "__main__":
-    # El programa espera un JSON como argumento
-    if len(sys.argv) < 2:
-        print("Uso: python export_to_pdf.py '<json_data>'")
-    else:
-        json_data = json.loads(sys.argv[1])
+    try:
+        if len(sys.argv) > 1:
+            # Leer JSON desde argumento
+            print("Intentando cargar JSON desde argumento...")
+            json_data = json.loads(sys.argv[1])
+        else:
+            # Leer JSON desde archivo si no hay argumento
+            print("No se proporcionó JSON como argumento, leyendo desde 'data.json'...")
+            with open("data.json", "r") as file:
+                json_data = json.load(file)
+
+        # Generar PDF con los datos
         generate_pdf(json_data)
+
+    except FileNotFoundError:
+        print("Error: El archivo 'data.json' no existe.")
+    except json.JSONDecodeError as e:
+        print(f"Error: El JSON proporcionado es inválido. Detalles: {e}")
+    except Exception as e:
+        print(f"Error inesperado: {e}")

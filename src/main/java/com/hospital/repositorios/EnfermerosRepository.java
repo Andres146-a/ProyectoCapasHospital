@@ -9,4 +9,5 @@ public interface EnfermerosRepository {
     void eliminarEnfermero(int idEnfermero);
     Enfermero buscarPorId(int idEnfermero);
     List<Enfermero> listarTodos();
+    void actualizarEstado(int idEnfermero, String nuevoEstado);
 }

@@ -19,6 +19,15 @@ public class EnfermeroFacade {
         repository.guardarEnfermero(enfermero);
     }
 
+    public List<Enfermero> listarEnfermerosPorEstado(String estado) {
+        if (estado == null || estado.isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío.");
+        }
+        return repository.listarTodos().stream()
+                .filter(e -> estado.equalsIgnoreCase(e.getEstado()))
+                .toList();
+    }
+
     public List<Enfermero> listarEnfermeros() {
         return repository.listarTodos();
     }
@@ -29,6 +38,7 @@ public class EnfermeroFacade {
         }
         repository.eliminarEnfermero(id);
     }
+
     public void actualizarEnfermero(Enfermero enfermero) {
         if (enfermero.getId() <= 0) {
             throw new IllegalArgumentException("El ID del enfermero no es válido.");
@@ -41,4 +51,31 @@ public class EnfermeroFacade {
         }
         repository.actualizarEnfermero(enfermero);
     }
+
+    // Nuevo método para actualizar el estado del enfermero
+    // public void actualizarEstado(int idEnfermero, String nuevoEstado) {
+    //     if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+    //         throw new IllegalArgumentException("El estado no puede estar vacío.");
+    //     }
+    //     repository.actualizarEstado(idEnfermero, nuevoEstado);
+    // }
+
+    // Nuevo método para actualizar el estado del enfermero
+    public void actualizarEstado(int idEnfermero, String nuevoEstado) {
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío.");
+        }
+        repository.actualizarEstado(idEnfermero, nuevoEstado);
+    }
+
+    // Nuevo método para listar enfermeros activos
+    public List<Enfermero> listarActivos() {
+        return listarEnfermerosPorEstado("Activo");
+    }
+
+    // Nuevo método para listar enfermeros inactivos
+    public List<Enfermero> listarInactivos() {
+        return listarEnfermerosPorEstado("Inactivo");
+    }
+    
 }

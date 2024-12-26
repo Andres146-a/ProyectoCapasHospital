@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.PacientesInactivosController">
+
+    <!-- Button to return -->
+    <HBox alignment="CENTER_LEFT">
+        <Button text="Regresar" onAction="#regresarDashboard" styleClass="dashboard-button" />
+    </HBox>
+
+    <!-- Search field -->
+    <TextField fx:id="searchField" promptText="Buscar por nombre..." />
+
+    <!-- TableView for Inactive Patients -->
+    <TableView fx:id="pacientesTable" prefWidth="600" prefHeight="400">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn" prefWidth="100" />
+            <TableColumn text="Nombre" fx:id="nombreColumn" prefWidth="300" />
+            <TableColumn text="Edad" fx:id="edadColumn" prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <!-- Button to Activate Patient -->
+    <Button text="Activar Paciente" onAction="#activarPaciente" />
+
+</VBox>

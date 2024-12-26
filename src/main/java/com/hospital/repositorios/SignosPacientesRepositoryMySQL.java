@@ -1,7 +1,7 @@
 package com.hospital.repositorios;
 
 import com.hospital.modelos.SignosPaciente;
-import com.hospital.utilidades.DataBaseConnectiones;
+import com.hospital.utilidades.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ public class SignosPacientesRepositoryMySQL implements SignosPacientesRepository
 
     @Override
     public void guardarSignosPaciente(SignosPaciente signosPaciente) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "INSERT INTO signos_pacientes (id_paciente, temperatura, presion) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, signosPaciente.getIdPaciente());
@@ -27,7 +27,7 @@ public class SignosPacientesRepositoryMySQL implements SignosPacientesRepository
 
     @Override
     public void actualizarSignosPaciente(SignosPaciente signosPaciente) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "UPDATE signos_pacientes SET temperatura = ?, presion = ? WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setDouble(1, signosPaciente.getTemperatura());
@@ -41,7 +41,7 @@ public class SignosPacientesRepositoryMySQL implements SignosPacientesRepository
 
     @Override
     public void eliminarSignosPaciente(int idSignosPaciente) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "DELETE FROM signos_pacientes WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, idSignosPaciente);
@@ -53,7 +53,7 @@ public class SignosPacientesRepositoryMySQL implements SignosPacientesRepository
 
     @Override
     public SignosPaciente buscarPorId(int idSignosPaciente) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM signos_pacientes WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, idSignosPaciente);
@@ -75,7 +75,7 @@ public class SignosPacientesRepositoryMySQL implements SignosPacientesRepository
     @Override
     public List<SignosPaciente> listarTodos() {
         List<SignosPaciente> signos = new ArrayList<>();
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM signos_pacientes";
             PreparedStatement stmt = connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();

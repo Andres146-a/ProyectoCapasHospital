@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <GridPane hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospital.UI.IngresoPacientesController">
+    <!-- Título -->
     <Label text="Ingreso de Pacientes" GridPane.columnSpan="2" style="-fx-font-size: 20; -fx-font-weight: bold;" GridPane.halignment="CENTER"/>
-    
+
+    <!-- Campos del formulario -->
     <Label text="Cédula:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
     <TextField fx:id="txtCedula" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-    
+
     <Label text="Nombre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
     <TextField fx:id="txtNombre" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
@@ -28,12 +29,30 @@
     <TextField fx:id="txtEmail" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
     <Label text="Dirección:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-    <TextArea fx:id="txtDireccion" prefHeight="60" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+    <TextArea fx:id="txtDireccion" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
 
-    <Button text="Guardar" onAction="#guardarPaciente" GridPane.rowIndex="9" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+    <!-- Campo para Enfermedad -->
+    <Label text="Enfermedad:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+    <TextField fx:id="txtEnfermedad" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
 
-   <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard" 
-        style="-fx-background-color: #42A5F5; -fx-text-fill: white;" 
-        GridPane.rowIndex="10" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+    <!-- Tipo de Antecedente -->
+    <Label text="Tipo de Antecedente:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="cbTipoAntecedente" GridPane.rowIndex="10" GridPane.columnIndex="1" promptText="Seleccione un tipo"/>
 
+    <!-- Área dinámica para antecedentes -->
+    <TextArea fx:id="txtAntecedenteDetalle" GridPane.rowIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" visible="false" promptText="Detalle del antecedente"/>
+    
+    <!-- Tabla para mostrar pacientes -->
+   <!-- <Label text="Pacientes Registrados:" GridPane.rowIndex="12" GridPane.columnSpan="2" style="-fx-font-size: 16; -fx-font-weight: bold;" GridPane.halignment="CENTER"/>
+    <TableView fx:id="tablaPacientes" GridPane.rowIndex="13" GridPane.columnSpan="2" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="100"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200"/>
+            <TableColumn fx:id="colApellido" text="Apellido" prefWidth="200"/>
+        </columns> 
+    </TableView>  -->
+
+    <!-- Botones -->
+    <Button text="Guardar Paciente" onAction="#guardarPaciente" GridPane.rowIndex="14" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+    <Button text="Regresar al Dashboard" onAction="#regresarAlDashboard" GridPane.rowIndex="15" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
 </GridPane>

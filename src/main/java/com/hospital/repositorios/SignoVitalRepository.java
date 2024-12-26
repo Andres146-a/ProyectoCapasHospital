@@ -9,4 +9,5 @@ public interface SignoVitalRepository {
     void eliminarSignoVital(int idSignoVital);
     SignoVital buscarPorId(int idSignoVital);
     List<SignoVital> listarTodos();
+    void cambiarEstado(int idPaciente, boolean activo);
 }

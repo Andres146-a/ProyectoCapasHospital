@@ -1,7 +1,8 @@
 package com.hospital.repositorios;
 
 import com.hospital.modelos.SignoVital;
-import com.hospital.utilidades.DataBaseConnectiones;
+
+import com.hospital.utilidades.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ public class SignoVitalRepositoryMySQL implements SignoVitalRepository {
 
     @Override
     public void guardarSignoVital(SignoVital signoVital) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "INSERT INTO signos_vitales (nombre, valor_normal) VALUES (?, ?)";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, signoVital.getNombre());
@@ -26,7 +27,7 @@ public class SignoVitalRepositoryMySQL implements SignoVitalRepository {
 
     @Override
     public void actualizarSignoVital(SignoVital signoVital) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "UPDATE signos_vitales SET nombre = ?, valor_normal = ? WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, signoVital.getNombre());
@@ -37,10 +38,23 @@ public class SignoVitalRepositoryMySQL implements SignoVitalRepository {
             throw new RuntimeException("Error al actualizar el signo vital: " + e.getMessage());
         }
     }
+    @Override
+public void cambiarEstado(int idPaciente, boolean activo) {
+    try (Connection connection = DatabaseConnection.getConnection()) {
+        String query = "UPDATE pacientes SET activo = ? WHERE id = ?";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setBoolean(1, activo);
+        stmt.setInt(2, idPaciente);
+        stmt.executeUpdate();
+        System.out.println("Estado del paciente actualizado exitosamente.");
+    } catch (Exception e) {
+        throw new RuntimeException("Error al actualizar el estado del paciente: " + e.getMessage());
+    }
+}
 
     @Override
     public void eliminarSignoVital(int idSignoVital) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "DELETE FROM signos_vitales WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, idSignoVital);
@@ -52,7 +66,7 @@ public class SignoVitalRepositoryMySQL implements SignoVitalRepository {
 
     @Override
     public SignoVital buscarPorId(int idSignoVital) {
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM signos_vitales WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, idSignoVital);
@@ -73,7 +87,7 @@ public class SignoVitalRepositoryMySQL implements SignoVitalRepository {
     @Override
     public List<SignoVital> listarTodos() {
         List<SignoVital> signos = new ArrayList<>();
-        try (Connection connection = DataBaseConnectiones.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT * FROM signos_vitales";
             PreparedStatement stmt = connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();

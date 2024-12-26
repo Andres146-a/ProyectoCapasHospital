@@ -1,52 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="rootPane"
             fx:controller="com.hospital.UI.MainController"
             stylesheets="@styles.css">
 
-
     <!-- Encabezado -->
     <top>
-        <Label text="Hospital Management System" styleClass="title-label"/>
-
+        <Label text="Hospital Management System" styleClass="title-label" alignment="CENTER"/>
     </top>
 
     <!-- Contenido Dinámico -->
     <center>
         <StackPane fx:id="contenidoPrincipal" prefHeight="400" style="-fx-background-color: #FFFFFF;">
-            <!-- Dashboard Principal al Inicio -->
             <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
                 <!-- Resumen de Estadísticas -->
                 <HBox spacing="50" alignment="CENTER">
-                   <VBox spacing="10" alignment="CENTER" styleClass="dashboard-card" onMouseClicked="#mostrarPacientesActivos">
-    <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
-        <Image url="@paciente.png"/>
-    </ImageView>
-    <Label fx:id="lblPacientesActivos" text="Pacientes Activos: 120" styleClass="dashboard-label"/>
-</VBox>
+                    <VBox spacing="10" alignment="CENTER" styleClass="dashboard-card" onMouseClicked="#mostrarPacientesActivos" style="-fx-cursor: hand;">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
+                            <Image url="@paciente.png"/>
+                        </ImageView>
+                        <Label fx:id="lblPacientesActivos" text="Pacientes Activos: 120" styleClass="dashboard-label"/>
+                    </VBox>
 
-      <VBox fx:id="tarjetaConsultasHoy" spacing="10" alignment="CENTER" styleClass="dashboard-card" 
-      onMouseClicked="#mostrarConsultasHoy" style="-fx-cursor: hand;">
-    <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
-        <Image url="@consultas.png"/>
-    </ImageView>
-    <Label fx:id="lblConsultasDia" text="Consultas Hoy: 35" styleClass="dashboard-label"/>
-</VBox>
+                    <VBox fx:id="tarjetaConsultasHoy" spacing="10" alignment="CENTER" styleClass="dashboard-card" onMouseClicked="#mostrarConsultasHoy" style="-fx-cursor: hand;">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
+                            <Image url="@consultas.png"/>
+                        </ImageView>
+                        <Label fx:id="lblConsultasDia" text="Consultas Hoy: 35" styleClass="dashboard-label"/>
+                    </VBox>
 
-
-
-<VBox fx:id="tarjetaEnfermeros" spacing="10" alignment="CENTER" styleClass="dashboard-card" 
-      style="-fx-cursor: hand;" onMouseClicked="#mostrarEnfermerosDisponibles">
-    <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
-        <Image url="@enfermero.png"/>
-    </ImageView>
-    <Label text="Enfermeros Disponibles: 15" styleClass="dashboard-label"/>
-</VBox>
-
+                    <VBox fx:id="tarjetaEnfermeros" spacing="10" alignment="CENTER" styleClass="dashboard-card" onMouseClicked="#mostrarEnfermerosDisponibles" style="-fx-cursor: hand;">
+                        <ImageView preserveRatio="true" fitHeight="80" fitWidth="80">
+                            <Image url="@enfermero.png"/>
+                        </ImageView>
+                        <Label text="Enfermeros Disponibles: 15" styleClass="dashboard-label"/>
+                    </VBox>
                 </HBox>
 
                 <!-- Botones de Navegación -->
@@ -54,18 +48,13 @@
                     <Button text="Apertura de Ficha Médica" onAction="#mostrarAperturaFichaMedica"/>
                     <Button text="Toma de Signos" onAction="#mostrarTomaSignos"/>
                     <Button text="Consulta Médica" onAction="#mostrarConsultaMedica"/>
-                    <!-- <Button text="Historial de Pacientes" onAction="#mostrarHistorialPacientes"/> -->
                     <Button text="Reportes Médicos" onAction="#mostrarReportesMedicos"/>
                 </HBox>
 
-
                 <!-- Alertas Importantes -->
-               <VBox styleClass="alert-section">
-    <Label text="⚠️ Alertas Importantes" styleClass="dashboard-alert-title"/>
-    <Label text="Juan Pérez: Hipertensión" styleClass="alert-item"/>
-    <Label text="María López: Fiebre" styleClass="alert-item"/>
-    <Label text="Carlos González: Bradicardia" styleClass="alert-item"/>
-</VBox>
+               <VBox fx:id="alertasImportantesVBox" spacing="10" alignment="CENTER">
+                    <Label text="⚠️ Alertas Importantes" styleClass="dashboard-alert-title"/>
+                </VBox>
 
             </VBox>
         </StackPane>

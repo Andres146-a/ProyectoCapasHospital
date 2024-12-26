@@ -14,6 +14,9 @@ public class Consulta {
     private final StringProperty descripcion;
     private Paciente paciente;
 
+    
+
+    // Constructor principal
     public Consulta(int id, Paciente paciente, String doctor, LocalDate fecha, String descripcion) {
         this.id = new SimpleIntegerProperty(id);
         this.paciente = paciente;
@@ -21,6 +24,15 @@ public class Consulta {
         this.fecha = fecha;
         this.descripcion = new SimpleStringProperty(descripcion);
     }
+
+    // Constructor secundario ajustado
+    // public Consulta(int i, Paciente paciente1, LocalDate now, String doctor, String descripcion, String string3) {
+    //     this.id = new SimpleIntegerProperty(i);
+    //     this.paciente = paciente1;
+    //     this.fecha = now;
+    //     this.doctor = new SimpleStringProperty(doctor);
+    //     this.descripcion = new SimpleStringProperty(descripcion);
+    // }
 
     // Métodos Property para TableView
     public IntegerProperty idProperty() {
